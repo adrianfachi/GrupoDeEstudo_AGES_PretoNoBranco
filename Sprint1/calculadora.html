@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora - Adrian Fachi</title>
     <link rel="stylesheet" href="calculadora.css">
+    <link id="tema" rel="stylesheet" href="calculadoraBlack.css">
 </head>
 <body>
     <header>
@@ -13,6 +14,10 @@
     <main>
         <section id="calculadora">
             <div id="calculadora-principal">
+                <div id="calculadora-tema">
+                    <input type="checkbox" id="tema-input">
+                    <label for="tema-input" class="tema-label"></label>
+                </div>
                 <div id="resultados">
                     <p id="texto-operacao"></p>
                     <p id="resultado"></p>
@@ -55,4 +60,5 @@
     </footer>
 </body>
 <script src="calculadora.js"></script>
+<script src="calculadoraCientifica.js"></script>
 </html>

@@ -1,0 +1,43 @@
+body {
+    background-color: #D2D3DA;
+    color: black;
+}
+
+#calculadora-principal {
+    background-color: #F1F2F3;
+}
+
+input {
+    color: #000000;
+}
+
+
+#coluna4 > input{
+    background-color: #4B5EFC;
+}
+
+.numero {
+    background-color: #ffffff;    
+}
+
+#limpar, #inversor, #porcentagem  {
+        background-color: #D2D3DA;
+}
+
+#texto-operacao {
+    color: #000000;
+}
+
+#resultado {
+    color: #000000;
+}
+
+.tema-label {
+    background-color: #ccc;
+}
+
+.tema-label::before {
+    background-color: #fff;
+}
+
+

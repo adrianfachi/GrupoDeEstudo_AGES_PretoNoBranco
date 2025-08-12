@@ -1,13 +1,30 @@
 const operacao = document.getElementById('texto-operacao');
 const resultado = document.getElementById('resultado')
+const tema = document.getElementById('tema')
 let fezOperacao = false
+
+const temaCheck = document.getElementById('tema-input');
+temaCheck.addEventListener('change', () => {
+    if(temaCheck.checked) {
+        tema.setAttribute('href', 'calculadoraWhite.css');
+        operacao.style.color = "#000000"
+    } else {
+        tema.setAttribute('href', 'calculadoraBlack.css');
+        operacao.style.color = "#ffffff"
+    }
+})
+
 
 function inserir(num){
     if(fezOperacao) {
         operacao.id = "texto-operacao"
         operacao.innerHTML = resultado.innerHTML
         operacao.style.fontSize = "50px"
-        operacao.style.color = "#FFFFFF"
+        if(temaCheck.checked) {
+            operacao.style.color = "#000000"
+        } else { 
+            operacao.style.color = "#ffffff"
+        }
         resultado.innerHTML = ""
         fezOperacao = false
     }
