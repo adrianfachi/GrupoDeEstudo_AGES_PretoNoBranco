@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - Adrian Fachi</title>
+    <link rel="stylesheet" href="calculadora.css">
+</head>
+<body>
+    <header>
+        <h1>Seja bem-vindo a calculadora</h1>
+    </header>
+    <main>
+        <section id="calculadora">
+            <div id="calculadora-principal">
+                <div id="resultados">
+                    <p id="texto-operacao"></p>
+                    <p id="resultado"></p>
+                </div>
+                <div id="calculadora-botoes">
+                    <div id="coluna1" class="colunas">
+                        <input type="button" value="C" id="limpar" onclick="deletarTudo()">
+                        <input type="button" value="7" id="7" class="numero" onclick="inserir(7)">
+                        <input type="button" value="4" id="4" class="numero" onclick="inserir(4)">
+                        <input type="button" value="1" id="1" class="numero" onclick="inserir(1)">
+                        <input type="button" value="." id="." class="numero" onclick="inserir('.')">
+                    </div>
+                    <div id="coluna2" class="colunas">
+                        <input type="button" value="+/-" id="inversor" onclick="alteraSinal()">
+                        <input type="button" value="8" id="8" class="numero" onclick="inserir(8)">
+                        <input type="button" value="5" id="5" class="numero" onclick="inserir(5)">
+                        <input type="button" value="2" id="2" class="numero" onclick="inserir(2)">
+                        <input type="button" value="0" id="0" class="numero" onclick="inserir(0)">
+                    </div>
+                    <div id="coluna3" class="colunas">
+                        <input type="button" value="%" id="porcentagem" onclick="inserir('%')">
+                        <input type="button" value="9" id="9" class="numero" onclick="inserir(9)">
+                        <input type="button" value="6" id="6" class="numero" onclick="inserir(6)">
+                        <input type="button" value="3" id="3" class="numero" onclick="inserir(3)">
+                        <input type="button" value="&#9003;" id="delete" class="numero" onclick="deletar()">
+                    </div>
+                    <div id="coluna4" class="colunas">
+                        <input type="button" value="&divide;" id="dividido" onclick="inserir(' / ')">
+                        <input type="button" value="&times;" id="vezes" onclick="inserir(' * ')">
+                        <input type="button" value="&minus;" id="menos" onclick="inserir(' - ')">
+                        <input type="button" value="&#43;" id="mais" onclick="inserir(' + ')">
+                        <input type="button" value="=" id="igual" onclick="res()">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Desenvolvido por Adrian Fachi</p>
+    </footer>
+</body>
+<script src="calculadora.js"></script>
+</html>
