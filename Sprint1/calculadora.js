@@ -67,3 +67,43 @@ function res(){
         operacao.innerHTML = "Nada para calcular"
     }
 }
+
+document.addEventListener('keydown', function(event) {
+    const tecla = event.key;
+
+    if (!isNaN(tecla)) {
+        inserir(tecla);
+    }
+
+    else if (tecla === '+') {
+        inserir(' + ');
+    }
+    else if (tecla === '-') {
+        inserir(' - ');
+    }
+    else if (tecla === '*') {
+        inserir(' * ');
+    }
+    else if (tecla === '/') {
+        inserir(' / ');
+    }
+    else if (tecla === '%') {
+        inserir('%');
+    }
+    else if (tecla === '.' || tecla === ',') {
+        inserir('.');
+    }
+
+    else if (tecla === 'Enter') {
+        res();
+    }
+
+    else if (tecla === 'Backspace') {
+        deletar();
+        event.preventDefault();
+    }
+
+    else if (tecla === 'Escape') {
+        deletarTudo();
+    }
+});
