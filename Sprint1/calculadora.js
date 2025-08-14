@@ -16,10 +16,7 @@ temaCheck.addEventListener('change', () => {
 })
 
 function formatarExpressao(expr) {
-    // Substitui todos os números isolados por sua versão formatada
     return expr.replace(/(\d+(\.\d+)?)/g, function(numero) {
-        console.log(numero)
-        // Troca ponto por vírgula para decimais, mas mantém ponto para milhar
         let num = Number(numero.replace(',', '.'));
         if (isNaN(num)) return numero;
         return num.toLocaleString('pt-BR');
@@ -39,7 +36,19 @@ function inserir(num){
         fezOperacao = false
     }
     
-    operacaoInterna += num
+
+    if (operacaoInterna[operacaoInterna.length -1] == " ") {
+        if (num == " + " || num == " * " || num == " / " || num == " - ") {
+            operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - 3)
+            operacaoInterna += num
+        }else {
+            operacaoInterna += num
+        }
+        
+    } else {
+        operacaoInterna += num
+    }
+
     operacao.innerHTML = formatarExpressao(operacaoInterna)
 }
 
@@ -49,7 +58,9 @@ function deletar(){
 }
 
 function deletarTudo() {
-    location.reload()
+    operacaoInterna = ""
+    operacao.innerHTML = ""
+    resultado.innerHTML = ""
 }
 
 function alteraSinal () {
@@ -63,7 +74,6 @@ function alteraSinal () {
         operacaoInterna = antesUltimoNumero + " " + eval(ultimoNumero + " * -1")
         operacao.innerHTML = formatarExpressao(operacaoInterna)
     }
-    console.log(operacaoInterna)
 }
 
 function res(){
@@ -76,6 +86,7 @@ function res(){
     if(operacao.innerHTML.length != 0){
         operacao.style.fontSize = "20px"
         operacao.style.color = "#4E505F"
+        operacaoFinal = operacaoFinal.replace(/\b0+(\d+)/g, '$1');
         operacaoInterna = String(eval(operacaoFinal))
         resultado.innerHTML = formatarExpressao(operacaoInterna)
         fezOperacao = true
@@ -88,7 +99,7 @@ document.addEventListener('keydown', function(event) {
     
     document.querySelectorAll('input').forEach(btn => {
         btn.addEventListener('click', function() {
-            this.blur() // remove o foco do botão
+            this.blur()
         })
     })
 
@@ -97,7 +108,6 @@ document.addEventListener('keydown', function(event) {
     if (!isNaN(tecla)) {
         inserir(tecla);
     }
-
     else if (tecla === '+') {
         inserir(' + ');
     }
