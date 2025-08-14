@@ -2,6 +2,7 @@ const operacao = document.getElementById('texto-operacao');
 const resultado = document.getElementById('resultado')
 const tema = document.getElementById('tema')
 let fezOperacao = false
+let operacaoInterna = "";
 
 const temaCheck = document.getElementById('tema-input');
 temaCheck.addEventListener('change', () => {
@@ -14,11 +15,20 @@ temaCheck.addEventListener('change', () => {
     }
 })
 
+function formatarExpressao(expr) {
+    // Substitui todos os números isolados por sua versão formatada
+    return expr.replace(/(\d+(\.\d+)?)/g, function(numero) {
+        console.log(numero)
+        // Troca ponto por vírgula para decimais, mas mantém ponto para milhar
+        let num = Number(numero.replace(',', '.'));
+        if (isNaN(num)) return numero;
+        return num.toLocaleString('pt-BR');
+    });
+}
 
 function inserir(num){
     if(fezOperacao) {
-        operacao.id = "texto-operacao"
-        operacao.innerHTML = resultado.innerHTML
+        operacao.innerHTML = operacaoInterna
         operacao.style.fontSize = "50px"
         if(temaCheck.checked) {
             operacao.style.color = "#000000"
@@ -28,12 +38,14 @@ function inserir(num){
         resultado.innerHTML = ""
         fezOperacao = false
     }
-    const numero = operacao.innerHTML
-    operacao.innerHTML = numero + num
+    
+    operacaoInterna += num
+    operacao.innerHTML = formatarExpressao(operacaoInterna)
 }
 
 function deletar(){
-    operacao.innerHTML = operacao.innerHTML.substring(0, operacao.innerHTML.length - 1)
+    operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - 1)
+    operacao.innerHTML = formatarExpressao(operacaoInterna)
 }
 
 function deletarTudo() {
@@ -41,18 +53,21 @@ function deletarTudo() {
 }
 
 function alteraSinal () {
-    const ultimoEspaco = operacao.innerHTML.lastIndexOf(" ")
+    const ultimoEspaco = operacaoInterna.lastIndexOf(" ")
     if(ultimoEspaco === -1) {
-        operacao.innerHTML = eval(operacao.innerHTML + " * -1")
+        operacaoInterna = String(eval(operacaoInterna + " * -1"))
+        operacao.innerHTML = formatarExpressao(operacaoInterna)
     } else {
-        const ultimoNumero = operacao.innerHTML.substring(ultimoEspaco);
-        const antesUltimoNumero = operacao.innerHTML.substring(0, ultimoEspaco);
-        operacao.innerHTML = antesUltimoNumero + " " + eval(ultimoNumero + " * -1")
+        const ultimoNumero = operacaoInterna.substring(ultimoEspaco);
+        const antesUltimoNumero = operacaoInterna.substring(0, ultimoEspaco);
+        operacaoInterna = antesUltimoNumero + " " + eval(ultimoNumero + " * -1")
+        operacao.innerHTML = formatarExpressao(operacaoInterna)
     }
+    console.log(operacaoInterna)
 }
 
 function res(){
-    let operacaoFinal = operacao.innerHTML
+    let operacaoFinal = operacaoInterna
 
     if(operacaoFinal.includes("%")){
         operacaoFinal = operacaoFinal.replace("%", "/ 100")
@@ -61,7 +76,8 @@ function res(){
     if(operacao.innerHTML.length != 0){
         operacao.style.fontSize = "20px"
         operacao.style.color = "#4E505F"
-        resultado.innerHTML = eval(operacaoFinal)
+        operacaoInterna = String(eval(operacaoFinal))
+        resultado.innerHTML = formatarExpressao(operacaoInterna)
         fezOperacao = true
     }else{
         operacao.innerHTML = "Nada para calcular"
@@ -69,6 +85,13 @@ function res(){
 }
 
 document.addEventListener('keydown', function(event) {
+    
+    document.querySelectorAll('input').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.blur() // remove o foco do botão
+        })
+    })
+
     const tecla = event.key;
 
     if (!isNaN(tecla)) {
@@ -96,6 +119,7 @@ document.addEventListener('keydown', function(event) {
 
     else if (tecla === 'Enter') {
         res();
+        event.preventDefault
     }
 
     else if (tecla === 'Backspace') {
@@ -105,5 +129,6 @@ document.addEventListener('keydown', function(event) {
 
     else if (tecla === 'Escape') {
         deletarTudo();
+        event.preventDefault
     }
 });
