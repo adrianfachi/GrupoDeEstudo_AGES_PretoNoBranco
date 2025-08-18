@@ -5,19 +5,11 @@
     padding: 0;
 }
 
-header {
-    height: 15vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Roboto", sans-serif;
-}
-
 section {
     font-family: "Roboto", sans-serif;
-    height: 70vh;
     display: flex;
+    flex-direction: column;
+    height: 100vh;
     justify-content: center;
     align-items: center;
 }
@@ -28,6 +20,28 @@ section {
     padding: 16px;
     border-radius: 32px;
     gap: 25px;
+}
+
+#cientifica {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.linhasCientifica {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.linhasCientifica input {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    border-radius: 24px;
+    border: none;
 }
 
 #calculadora-botoes {
@@ -45,7 +59,7 @@ section {
     gap: 16px;
 }
 
-input {
+.colunas input {
     width: 72px;
     height: 48px;
     font-size: 24px;
@@ -66,16 +80,6 @@ input {
 
 #resultado {
     font-size: 50px;
-}
-
-
-footer {
-    font-family: "Roboto", sans-serif;
-    height: 15vh;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #calculadora-tema {

@@ -2,7 +2,8 @@ const operacao = document.getElementById('texto-operacao');
 const resultado = document.getElementById('resultado')
 const tema = document.getElementById('tema')
 let fezOperacao = false
-let operacaoInterna = "";
+let operacaoInterna = ""
+let ultimaOperacao = ""
 
 const temaCheck = document.getElementById('tema-input');
 temaCheck.addEventListener('change', () => {
@@ -19,13 +20,20 @@ function formatarExpressao(expr) {
     return expr.replace(/(\d+(\.\d+)?)/g, function(numero) {
         let num = Number(numero.replace(',', '.'));
         if (isNaN(num)) return numero;
-        return num.toLocaleString('pt-BR');
+        return num.toLocaleString('pt-BR', {
+            maximumFractionDigits: 8
+        });
     });
 }
 
 function inserir(num){
     if(fezOperacao) {
-        operacao.innerHTML = operacaoInterna
+        if(!isNaN(operacaoInterna)) {
+            operacao.innerHTML = operacaoInterna
+        } else {
+            operacaoInterna = 0
+            operacao.innerHTML = 0
+        }   
         operacao.style.fontSize = "50px"
         if(temaCheck.checked) {
             operacao.style.color = "#000000"
@@ -37,29 +45,39 @@ function inserir(num){
     }
     
 
-    if (operacaoInterna[operacaoInterna.length -1] == " ") {
-        if (num == " + " || num == " * " || num == " / " || num == " - ") {
-            operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - 3)
+    if (isNaN(operacaoInterna[operacaoInterna.length -1])) {
+        if (num == "+" || num == "*" || num == "/" || num == "-") {
+            operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - 1)
             operacaoInterna += num
         }else {
             operacaoInterna += num
         }
-        
     } else {
         operacaoInterna += num
     }
-
     operacao.innerHTML = formatarExpressao(operacaoInterna)
+    ultimaOperacao = num
 }
 
 function deletar(){
-    operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - 1)
-    operacao.innerHTML = formatarExpressao(operacaoInterna)
+    if(isNaN(operacaoInterna[operacaoInterna.length - 1])) {
+        operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - ultimaOperacao.length)
+        operacao.innerHTML = formatarExpressao(operacaoInterna)
+    } else {
+        operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - 1)
+        operacao.innerHTML = formatarExpressao(operacaoInterna)
+    }
 }
 
 function deletarTudo() {
+    operacao.style.fontSize = "50px"
+    if(temaCheck.checked) {
+        operacao.style.color = "#000000"
+    } else { 
+        operacao.style.color = "#ffffff"
+    }
     operacaoInterna = ""
-    operacao.innerHTML = ""
+    operacao.innerHTML = "0"
     resultado.innerHTML = ""
 }
 
@@ -76,12 +94,35 @@ function alteraSinal () {
     }
 }
 
+function fatorial(n) {
+    if (n < 0) return NaN;
+    if (n === 0) return 1;
+    let r = 1;
+    for (let i = 1; i <= n; i++) r *= i;
+    return r;
+}
+
 function res(){
     let operacaoFinal = operacaoInterna
 
-    if(operacaoFinal.includes("%")){
-        operacaoFinal = operacaoFinal.replace("%", "/ 100")
-    }
+    operacaoFinal = operacaoFinal
+        .replace(/(\d)(sin|cos|tan|log|ln|√)/g, '$1*$2')
+        .replace(/\)(sin|cos|tan|log|ln|√)/g, ')*$1')
+        .replace(/%/g, "/100")
+        .replace(/π/g, "Math.PI")
+        .replace(/e/g, "Math.E")
+        .replace(/√(\d+(\.\d+)?)/g, "Math.sqrt($1)")
+        .replace(/(\d+(\.\d+)?)\^(\d+(\.\d+)?)/g, "Math.pow($1,$3)")
+        .replace(/sin\(([^)]+)\)/g, "Math.sin($1*Math.PI/180)")
+        .replace(/cos\(([^)]+)\)/g, "Math.cos($1*Math.PI/180)")
+        .replace(/tan\(([^)]+)\)/g, "Math.tan($1*Math.PI/180)")
+        .replace(/log\(([^)]+)\)/g, "Math.log10($1)")
+        .replace(/ln\(([^)]+)\)/g, "Math.log($1)")
+        
+
+    operacaoFinal = operacaoFinal.replace(/(\d+)!/g, function(_, n) {
+        return fatorial(Number(n));
+    });
 
     if(operacao.innerHTML.length != 0){
         operacao.style.fontSize = "20px"
@@ -109,16 +150,16 @@ document.addEventListener('keydown', function(event) {
         inserir(tecla);
     }
     else if (tecla === '+') {
-        inserir(' + ');
+        inserir('+');
     }
     else if (tecla === '-') {
-        inserir(' - ');
+        inserir('-');
     }
     else if (tecla === '*') {
-        inserir(' * ');
+        inserir('*');
     }
     else if (tecla === '/') {
-        inserir(' / ');
+        inserir('/');
     }
     else if (tecla === '%') {
         inserir('%');

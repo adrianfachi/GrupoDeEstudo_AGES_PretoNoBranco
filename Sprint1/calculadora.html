@@ -8,19 +8,33 @@
     <link id="tema" rel="stylesheet" href="calculadoraBlack.css">
 </head>
 <body>
-    <header>
-        <h1>Seja bem-vindo a calculadora</h1>
-    </header>
     <main>
         <section id="calculadora">
-            <div id="calculadora-principal">
-                <div id="calculadora-tema">
+            <div id="calculadora-tema">
                     <input type="checkbox" id="tema-input">
                     <label for="tema-input" class="tema-label"></label>
                 </div>
+            <div id="calculadora-principal">
+                
                 <div id="resultados">
-                    <p id="texto-operacao"></p>
+                    <p id="texto-operacao">0</p>
                     <p id="resultado"></p>
+                </div>
+                <div id="cientifica">
+                    <div id="linha1Cientifica" class="linhasCientifica">
+                        <input type="button" value="&radic;" id="raiz" class="numero" onclick="inserir(`√`)">
+                        <input type="button" value="!" id="fatorial" class="numero" onclick="inserir(`!`)">
+                        <input type="button" value="^" id="elevado" class="numero" onclick="inserir('^')">
+                        <input type="button" value="&#960;" id="pi" class="numero" onclick="inserir('π')">
+                        <input type="button" value="e" id="e" class="numero" onclick="inserir('e')">
+                    </div>
+                    <div id="linha2Cientifica" class="linhasCientifica">
+                        <input type="button" value="sin" id="sin" class="numero" onclick="inserir(`sin`)">
+                        <input type="button" value="cos" id="cos" class="numero" onclick="inserir(`cos`)">
+                        <input type="button" value="tan" id="tan" class="numero" onclick="inserir(`tan`)">
+                        <input type="button" value="log" id="log" class="numero" onclick="inserir(`log`)">
+                        <input type="button" value="ln" id="ln" class="numero" onclick="inserir(`ln`)">
+                    </div>
                 </div>
                 <div id="calculadora-botoes">
                     <div id="coluna1" class="colunas">
@@ -45,20 +59,16 @@
                         <input type="button" value="&#9003;" id="delete" class="numero" onclick="deletar()">
                     </div>
                     <div id="coluna4" class="colunas">
-                        <input type="button" value="&divide;" id="dividido" onclick="inserir(' / ')">
-                        <input type="button" value="&times;" id="vezes" onclick="inserir(' * ')">
-                        <input type="button" value="&minus;" id="menos" onclick="inserir(' - ')">
-                        <input type="button" value="&#43;" id="mais" onclick="inserir(' + ')">
+                        <input type="button" value="&divide;" id="dividido" onclick="inserir('/')">
+                        <input type="button" value="&times;" id="vezes" onclick="inserir('*')">
+                        <input type="button" value="&minus;" id="menos" onclick="inserir('-')">
+                        <input type="button" value="&#43;" id="mais" onclick="inserir('+')">
                         <input type="button" value="=" id="igual" onclick="res()">
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    <footer>
-        <p>Desenvolvido por Adrian "MateBoy" Fachi</p>
-    </footer>
 </body>
 <script src="calculadora.js"></script>
-<script src="calculadoraCientifica.js"></script>
 </html>
