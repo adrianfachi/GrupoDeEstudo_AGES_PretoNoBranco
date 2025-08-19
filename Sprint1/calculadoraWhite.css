@@ -20,7 +20,7 @@ input {
     background-color: #ffffff;    
 }
 
-#limpar, #inversor, #porcentagem  {
+#limpar, #parenteses, #porcentagem  {
         background-color: #D2D3DA;
 }
 
@@ -38,6 +38,14 @@ input {
 
 .tema-label::before {
     background-color: #fff;
+}
+
+.cientifica-label {
+    background-color: #dcdcdc;
+}
+
+.seta {
+    border-top: 5px solid #fff;
 }
 
 

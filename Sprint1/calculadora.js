@@ -21,7 +21,7 @@ function formatarExpressao(expr) {
         let num = Number(numero.replace(',', '.'));
         if (isNaN(num)) return numero;
         return num.toLocaleString('pt-BR', {
-            maximumFractionDigits: 8
+            maximumFractionDigits: 12
         });
     });
 }
@@ -34,7 +34,7 @@ function inserir(num){
             operacaoInterna = 0
             operacao.innerHTML = 0
         }   
-        operacao.style.fontSize = "50px"
+        operacao.style.fontSize = "2.5rem"
         if(temaCheck.checked) {
             operacao.style.color = "#000000"
         } else { 
@@ -43,20 +43,42 @@ function inserir(num){
         resultado.innerHTML = ""
         fezOperacao = false
     }
-    
 
-    if (isNaN(operacaoInterna[operacaoInterna.length -1])) {
+    if (isNaN(operacaoInterna[operacaoInterna.length - 1])) {
         if (num == "+" || num == "*" || num == "/" || num == "-") {
-            operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - 1)
-            operacaoInterna += num
+            if(ultimaOperacao == ")" || ultimaOperacao == "π"|| ultimaOperacao == "e") {
+                operacaoInterna += num
+                ultimaOperacao = num
+            } else if(operacaoInterna[operacaoInterna.length - 1] == "("){
+                if (num != "*" || num != "/") {
+                    operacaoInterna += num
+                    ultimaOperacao = num
+                }
+            }else {
+                operacaoInterna = operacaoInterna.substring(0, operacaoInterna.length - 1)
+                operacaoInterna += num
+                ultimaOperacao = num
+            }
         }else {
-            operacaoInterna += num
+            if (num == 'cos' || num == 'sin' || num == 'tan' || num == 'log' || num == 'ln'){ 
+                operacaoInterna += num + "("
+                ultimaOperacao = num + "("
+            } else {
+                operacaoInterna += num
+                ultimaOperacao = num
+            }
         }
     } else {
-        operacaoInterna += num
+        if (num == 'cos' || num == 'sin' || num == 'tan' || num == 'log' || num == 'ln'){ 
+            operacaoInterna += num + "("
+            ultimaOperacao = num + "("
+        } else {
+            operacaoInterna += num
+            ultimaOperacao = num
+        }
     }
     operacao.innerHTML = formatarExpressao(operacaoInterna)
-    ultimaOperacao = num
+    
 }
 
 function deletar(){
@@ -81,17 +103,15 @@ function deletarTudo() {
     resultado.innerHTML = ""
 }
 
-function alteraSinal () {
-    const ultimoEspaco = operacaoInterna.lastIndexOf(" ")
-    if(ultimoEspaco === -1) {
-        operacaoInterna = String(eval(operacaoInterna + " * -1"))
-        operacao.innerHTML = formatarExpressao(operacaoInterna)
+function parenteses () {
+    if(operacaoInterna.lastIndexOf("(") > operacaoInterna.lastIndexOf(")")) {
+        operacaoInterna += ")"
+        ultimaOperacao = ")"
     } else {
-        const ultimoNumero = operacaoInterna.substring(ultimoEspaco);
-        const antesUltimoNumero = operacaoInterna.substring(0, ultimoEspaco);
-        operacaoInterna = antesUltimoNumero + " " + eval(ultimoNumero + " * -1")
-        operacao.innerHTML = formatarExpressao(operacaoInterna)
+        operacaoInterna += "("
+        ultimaOperacao = "("
     }
+    operacao.innerHTML = formatarExpressao(operacaoInterna)
 }
 
 function fatorial(n) {
@@ -103,11 +123,15 @@ function fatorial(n) {
 }
 
 function res(){
+    if(operacaoInterna.lastIndexOf("(") > operacaoInterna.lastIndexOf(")")) {
+        operacaoInterna += ")"
+        ultimaOperacao = ")"
+        operacao.innerHTML = formatarExpressao(operacaoInterna)
+    }
     let operacaoFinal = operacaoInterna
-
     operacaoFinal = operacaoFinal
-        .replace(/(\d)(sin|cos|tan|log|ln|√)/g, '$1*$2')
-        .replace(/\)(sin|cos|tan|log|ln|√)/g, ')*$1')
+        .replace(/(\d)(sin|cos|tan|log|ln|√|π|e)/g, '$1*$2')
+        .replace(/\)(sin|cos|tan|log|ln|√|π|e)/g, ')*$1')
         .replace(/%/g, "/100")
         .replace(/π/g, "Math.PI")
         .replace(/e/g, "Math.E")
@@ -128,9 +152,16 @@ function res(){
         operacao.style.fontSize = "20px"
         operacao.style.color = "#4E505F"
         operacaoFinal = operacaoFinal.replace(/\b0+(\d+)/g, '$1');
-        operacaoInterna = String(eval(operacaoFinal))
-        resultado.innerHTML = formatarExpressao(operacaoInterna)
-        fezOperacao = true
+        try {
+            operacaoInterna = String(eval(operacaoFinal))
+            resultado.innerHTML = formatarExpressao(operacaoInterna)
+            fezOperacao = true
+        } catch (error) {
+            console.log(error)
+            resultado.innerHTML = "Operação inválida"
+            operacaoInterna = "0"
+            fezOperacao = true
+        }
     }else{
         operacao.innerHTML = "Nada para calcular"
     }

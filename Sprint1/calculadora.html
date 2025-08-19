@@ -15,25 +15,30 @@
                     <label for="tema-input" class="tema-label"></label>
                 </div>
             <div id="calculadora-principal">
-                
                 <div id="resultados">
                     <p id="texto-operacao">0</p>
                     <p id="resultado"></p>
                 </div>
-                <div id="cientifica">
-                    <div id="linha1Cientifica" class="linhasCientifica">
-                        <input type="button" value="&radic;" id="raiz" class="numero" onclick="inserir(`√`)">
-                        <input type="button" value="!" id="fatorial" class="numero" onclick="inserir(`!`)">
-                        <input type="button" value="^" id="elevado" class="numero" onclick="inserir('^')">
-                        <input type="button" value="&#960;" id="pi" class="numero" onclick="inserir('π')">
-                        <input type="button" value="e" id="e" class="numero" onclick="inserir('e')">
-                    </div>
-                    <div id="linha2Cientifica" class="linhasCientifica">
-                        <input type="button" value="sin" id="sin" class="numero" onclick="inserir(`sin`)">
-                        <input type="button" value="cos" id="cos" class="numero" onclick="inserir(`cos`)">
-                        <input type="button" value="tan" id="tan" class="numero" onclick="inserir(`tan`)">
-                        <input type="button" value="log" id="log" class="numero" onclick="inserir(`log`)">
-                        <input type="button" value="ln" id="ln" class="numero" onclick="inserir(`ln`)">
+                <div id="bloco-cientifica">
+                    <input type="checkbox" id="cientifica-input">
+                    <label for="cientifica-input" class="cientifica-label">
+                        <span class="seta"></span>
+                    </label>
+                    <div id="cientifica">
+                        <div id="linha1Cientifica" class="linhasCientifica">
+                            <input type="button" value="&radic;" id="raiz" class="numero" onclick="inserir(`√`)">
+                            <input type="button" value="!" id="fatorial" class="numero" onclick="inserir(`!`)">
+                            <input type="button" value="^" id="elevado" class="numero" onclick="inserir('^')">
+                            <input type="button" value="&#960;" id="pi" class="numero" onclick="inserir('π')">
+                            <input type="button" value="e" id="e" class="numero" onclick="inserir('e')">
+                        </div>
+                        <div id="linha2Cientifica" class="linhasCientifica">
+                            <input type="button" value="sin" id="sin" class="numero" onclick="inserir(`sin`)">
+                            <input type="button" value="cos" id="cos" class="numero" onclick="inserir(`cos`)">
+                            <input type="button" value="tan" id="tan" class="numero" onclick="inserir(`tan`)">
+                            <input type="button" value="log" id="log" class="numero" onclick="inserir(`log`)">
+                            <input type="button" value="ln" id="ln" class="numero" onclick="inserir(`ln`)">
+                        </div>
                     </div>
                 </div>
                 <div id="calculadora-botoes">
@@ -45,7 +50,7 @@
                         <input type="button" value="." id="." class="numero" onclick="inserir('.')">
                     </div>
                     <div id="coluna2" class="colunas">
-                        <input type="button" value="+/-" id="inversor" onclick="alteraSinal()">
+                        <input type="button" value="()" id="parenteses" onclick="parenteses()">
                         <input type="button" value="8" id="8" class="numero" onclick="inserir(8)">
                         <input type="button" value="5" id="5" class="numero" onclick="inserir(5)">
                         <input type="button" value="2" id="2" class="numero" onclick="inserir(2)">
