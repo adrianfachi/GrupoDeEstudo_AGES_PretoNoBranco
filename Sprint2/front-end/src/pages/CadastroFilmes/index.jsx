@@ -23,7 +23,7 @@ function CadastrarFilme() {
     async function enviarInfo(event) {
         try {
             if(validaNome() && validaGenero()) {
-                await api.post("/cadastrar", {
+                await api.post("/filmes", {
                     nome: nomeValue.current.value,
                     genero: generoValue.current.value,
                     reviews: []
