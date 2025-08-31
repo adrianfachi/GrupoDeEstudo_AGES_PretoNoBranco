@@ -1,0 +1,65 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+}
+
+#principal {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+#titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 30px;
+    background-color: #d4cfff;
+    border-radius: 30px;
+    div {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    #novaReview {
+        height: 10vh;
+        width: 250px;
+        border-radius: 20px;
+        border: none;
+        padding: 10px;
+    }
+}
+
+#reviews {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+    list-style-type: none;
+}
+
+.review{
+    background-color: #dad5ff;
+    width: 200px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#link {
+    text-decoration: none;
+    color: rgb(118, 118, 255);
+}
+
+
+

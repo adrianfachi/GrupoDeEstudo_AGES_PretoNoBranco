@@ -1,0 +1,41 @@
+#principal {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#titulo {
+    font-size: 2rem;
+}
+
+#formulario {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#formulario input, button{
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
+}
+
+.info {
+    background-color: #cbcbcb;
+}
+
+#cadastrar {
+    background-color: rgb(118, 118, 255);
+}
+
+#menu {
+    text-decoration: none;
+    color: rgb(118, 118, 255);
+}
+
+

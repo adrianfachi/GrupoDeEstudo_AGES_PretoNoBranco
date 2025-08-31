@@ -1,0 +1,54 @@
+#principal {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+#pesquisa {
+    padding: 10px;
+    border-radius: 20px;
+    border: solid 1px;
+    width: 250px;
+}
+
+#lista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+}
+
+.filmes {
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(201, 201, 255);
+    padding: 15px;
+    border-radius: 20px;
+    gap: 20px;
+}
+
+#link {
+    text-decoration: none;
+    color: rgb(118, 118, 255);
+}
+
+.reviews {
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    background-color: #dde0ff;
+    border-radius: 20px;
+    padding: 5px;
+}
