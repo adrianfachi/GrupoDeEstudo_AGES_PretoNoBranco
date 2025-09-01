@@ -77,6 +77,19 @@ function reviewsFilmes() {
         }
     }
 
+    function videoURL() {
+        try {
+            if(filme.linkTrailer != undefined) {
+                const URLWatch = filme.linkTrailer
+                return URLWatch.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
+            } else {
+                return false
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div id={styles.principal}>
             {filme ? (
@@ -86,6 +99,11 @@ function reviewsFilmes() {
                         <h1>{filme.nome}</h1>
                         <p id={styles.genero}>{filme.genero}</p>
                         <p>Nota Média: {calcMedia(filme.reviews)}</p>
+                        {filme.linkTrailer ? (
+                            <iframe src={videoURL()} id={styles.videoTrailer}></iframe>
+                        ) : (
+                            <p></p>
+                        )}
                     </div>
                     <div>
                         <form id={styles.formulario} onSubmit={addReview}>

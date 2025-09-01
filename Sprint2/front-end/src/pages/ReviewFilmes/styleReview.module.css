@@ -61,5 +61,14 @@
     color: rgb(118, 118, 255);
 }
 
+#videoTrailer {
+    width: 40vw;
+    height: 40vh;
+}
 
+@media (max-width: 600px) {
+    #videoTrailer {
+        width: 80vw;
+    }
+}
 

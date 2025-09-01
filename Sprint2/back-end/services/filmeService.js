@@ -33,7 +33,7 @@ const filmeService = {
 
     updateFilme: async (id, data) => {
         try {
-            const filme = await Filme.findOneAndUpdate(id, data, {new: true})
+            const filme = await Filme.findByIdAndUpdate(id, data, {new: true})
             if (!filme) {
                 return 'filme não encontrado'
             }

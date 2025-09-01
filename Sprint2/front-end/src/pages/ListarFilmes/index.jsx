@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import api  from "../../services/api.js"
+import semCapa from "../../assets/semCapa.png"
 
 function ListarFilmes() {
     const [filmes, setFilmes] = useState();
@@ -51,12 +52,25 @@ function ListarFilmes() {
                 {procuraFilme && procuraFilme.length > 0 ? (
                     procuraFilme.map((filme) => (
                         <li key={filme._id} className={styles.filmes}>
-                            <div>
-                                <p>• Filme: {filme.nome}</p>
-                                <p>• Gênero: {filme.genero}</p>
-                                <p>• Nota Média: {calcMedia(filme.reviews)}</p>
+                            <div className={styles.filme}>
+                                <div>
+                                    {filme.linkCapa ? (
+                                        <img src={filme.linkCapa} alt="" className={styles.img}/>
+                                    ):(
+                                        <img src={semCapa} alt="" className={styles.img}/>
+                                    )}
+                                    
+                                </div>
+                                <div className={styles.descricaoFilme}>
+                                    <div>
+                                        <p>• Filme: {filme.nome}</p>
+                                        <p>• Gênero: {filme.genero}</p>
+                                        <p>• Nota Média: {calcMedia(filme.reviews)}</p>
+                                    </div>
+                                    <Link to={{pathname: "/review",search: `?query=${filme._id}`,}} className={styles.reviews}>Ver reviews</Link>
+                                </div>
                             </div>
-                            <Link to={{pathname: "/review",search: `?query=${filme._id}`,}} className={styles.reviews}>Ver reviews</Link>
+                            
                         </li>
                     ))
                 ) : (

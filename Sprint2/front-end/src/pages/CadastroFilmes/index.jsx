@@ -19,6 +19,8 @@ function CadastrarFilme() {
 
     const nomeValue = useRef();
     const generoValue = useRef();
+    const linkTrailer = useRef();
+    const linkCapa = useRef();
 
     async function enviarInfo(event) {
         try {
@@ -26,6 +28,8 @@ function CadastrarFilme() {
                 await api.post("/filmes", {
                     nome: nomeValue.current.value,
                     genero: generoValue.current.value,
+                    linkTrailer: linkTrailer.current.value,
+                    linkCapa: linkCapa.current.value,
                     reviews: []
                 })
             } else {
@@ -71,6 +75,8 @@ function CadastrarFilme() {
             <form id={styles.formulario} onSubmit={enviarInfo}>
                 <input ref={nomeValue} className={styles.info} placeholder="Nome" type="text"/>
                 <input ref={generoValue} className={styles.info} placeholder="Gênero" type="text"/>
+                <input ref={linkTrailer} type="text" className={styles.info} placeholder="Link Trailer"/>
+                <input ref={linkCapa} type="text" className={styles.info} placeholder="Link Capa"/>
                 <button id={styles.cadastrar}>Cadastro</button>
             </form>
             <Link to="/" id={styles.menu}>Menu principal</Link>
